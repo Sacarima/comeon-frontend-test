@@ -8,9 +8,9 @@
   "directories": {
     "lib": "lib"
   },
-    "scripts": {
+  "scripts": {
     "dev": "vite",
-    "mock:api": "json-server --watch mock/mock-data.json --port 3001 --middlewares mock/mock-api.js",
+    "mock:api": "json-server --watch mock/mock-data.json --port 3001 --middlewares mock/mock-api.cjs",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
     "lint": "eslint . --max-warnings=0",
@@ -18,20 +18,29 @@
     "test": "vitest",
     "test:run": "vitest run",
     "test:coverage": "vitest run --coverage",
-    "prepare": "husky"
+    "prepare": "husky",
+    "e2e": "playwright test",
+    "e2e:ui": "playwright test --ui",
+    "quality": "npm run typecheck && npm run lint && npm run test:coverage && npm run build"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@hookform/resolvers": "^5.4.0",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
+    "react-hook-form": "^7.80.0",
+    "react-icons": "^5.6.0",
+    "react-router-dom": "^7.18.0",
+    "web-vitals": "^5.3.0",
     "zod": "^4.4.3"
   },
   "devDependencies": {
     "@commitlint/cli": "^21.1.0",
     "@commitlint/config-conventional": "^21.1.0",
     "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.61.1",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
     "@testing-library/user-event": "^14.6.1",

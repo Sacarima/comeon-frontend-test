@@ -1,0 +1,45 @@
+.not-found-page {
+  min-height: calc(100vh - var(--header-height));
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 32px 16px;
+  background:
+    radial-gradient(circle at 50% 20%, rgba(57, 245, 106, 0.14), transparent 32%),
+    linear-gradient(180deg, rgba(24, 32, 26, 1), rgba(12, 16, 13, 1));
+}
+
+.not-found-content {
+  width: min(100%, 560px);
+  text-align: center;
+}
+
+.not-found-code {
+  margin: 0 0 12px;
+  color: var(--color-primary);
+  font-size: clamp(4rem, 14vw, 8rem);
+  font-weight: 950;
+  line-height: 0.9;
+}
+
+.not-found-content h1 {
+  margin: 0;
+  color: #ffffff;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1;
+}
+
+.not-found-content p:not(.not-found-code) {
+  max-width: 420px;
+  margin: 18px auto 0;
+  color: rgba(255, 255, 255, 0.68);
+  line-height: 1.6;
+}
+
+.not-found-link {
+  margin-top: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}

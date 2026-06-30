@@ -1,167 +1,234 @@
 ![comeon-javascript-test-site](example.png)
 # comeon-frontend-test
 
-Applicant's test for Frontend developers.
 
-## Assignment Overview
+A React + TypeScript casino lobby implementation for the ComeOn frontend assignment.
 
-The assignment is to use develop the frontend and tie together existing data to create a minimal, working casino website.
+The app includes authentication against the provided mock API, protected lobby access, game listing, search and category filtering, game launch integration, responsive styling, unit tests, E2E tests, coverage, and Core Web Vitals instrumentation.
 
-Basic HTML, CSS, images and JSON data is provided, however, feel free to impress by changing and enhancing any of these parts for an even better experience!
+## Tech Stack
 
-Your mission is to provide the frontend code that makes the parts work as described, below.
-**Feel free to use any other openly available library for validation, templating, dependency injection, etc.**
+- React 18
+- TypeScript
+- Vite
+- Zod
+- Vitest
+- Testing Library
+- Playwright
+- json-server
+- Web Vitals
+- ESLint
 
-## Assignment Criteria
+## Requirements
 
-We want to see how you approach and solve a problem, as well as look at code style and quality.
-Do take your time to do it right, rather than fast.
-Extra effort to improve on the "website" will be noted. :)
+Use the Node version defined in `.nvmrc`.
 
-While the test is primarily focused on TS (or JS), by all means use or change the HTML or CSS when that makes sense. We expect the app to be functional across various devices a.k.a responsive.
-
-Be prepared to discuss your choices and code when delivered. We would also expect you to answer on how to extend the application to include more features and functionality.
-
-These parts needs all to be completed for the assignment to be complete:
-
-### Login functionality
-
-* Connect the login form to the /login ajax call.
-* On valid username/password, transition to the games list screen.
-* On invalid username/password, provide feedback and allow to try again.
-
-### Log out functionality
-
-* Connect the log out button to the /logout ajax call.
-* On valid log out, transition to login screen with empty input fields.
-
-### Games list screen
-
-* Requires user to be logged in
-* List all games from the /games ajax call.
-* List categories from /categories ajax call.
-* Provide functionality for filtering by typing.
-* Provide functionality to filter by category.
-* Make it possible to start a game by clicking on the play icon.
-
-### Game play screen
-
-* Requires user to be logged in
-* Load the selected game via the provided API
-* Provide a way to go back to the Games list screen
-
-### Setup mock api
-```javascript
-npm install -g json-server
+```bash
+nvm use
 ```
 
-```javascript
-json-server --watch mock/mock-data.json --port 3001 --middlewares mock/mock-api.js
+Install dependencies:
+
+```bash
+npm install
 ```
 
-Update: Use json-server version other than latest or alpha for example 0.17.3 or lower.
+## Running The App
 
-## API
-There are four methods on the API: login, logout, games, and categories.
+Start the mock API:
 
-### Login
-Path: /login
-
-Will give you player information.
-It is possible to login with three accounts:
-
+```bash
+npm run mock:api
 ```
+
+In a second terminal, start the frontend:
+
+```bash
+npm run dev
+```
+
+The app runs at:
+
+```txt
+http://localhost:5173
+```
+
+The mock API runs at:
+
+```txt
+http://localhost:3001
+```
+
+## Mock Login Accounts
+
+```txt
 username: rebecka
 password: secret
+```
 
+```txt
 username: eric
 password: dad
+```
 
+```txt
 username: stoffe
 password: rock
 ```
 
-##### Request
-```javascript
-fetch('http://localhost:3001/login', {
-            method: 'post',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                username: 'rebecka',
-                password: 'secret'
-            })
-        }
-);
+## Available Scripts
+
+### Development
+
+```bash
+npm run dev
 ```
 
-##### Response
-```javascript
-{
-	status: 'success',
-	player: {
-            name: 'Rebecka Awesome',
-            avatar: 'images/avatar/rebecka.jpg',
-            event: 'Last seen gambling on Starburst.'            
-    }
-}
+Starts the Vite development server.
+
+```bash
+npm run mock:api
 ```
 
-### Log out
-Path: /logout
+Starts the mock API using `json-server`.
 
-Use the current player's username.
+### Build
 
-##### Request
-```javascript
-fetch('http://localhost:3001/logout', {
-            method: 'post',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                username: 'rebecka'
-            })
-        }
-);
+```bash
+npm run build
 ```
 
-### Games and Categories
-These methods are located on paths /games and /categories.
+Runs TypeScript build checks and creates a production build.
 
-Please explore the response of these methods.
-```javascript
-fetch('http://localhost:3001/games', { method: 'get' });
+```bash
+npm run preview
+```
+
+Previews the production build locally.
+
+### Code Quality
+
+```bash
+npm run typecheck
+```
+
+Runs TypeScript type checking.
+
+```bash
+npm run lint
+```
+
+Runs ESLint with zero warnings allowed.
+
+```bash
+npm run quality
+```
+
+Runs the full quality pipeline:
+
+```bash
+npm run typecheck && npm run lint && npm run test:coverage && npm run build
+```
+
+### Unit And Integration Tests
+
+```bash
+npm run test
+```
+
+Runs Vitest in watch mode.
+
+```bash
+npm run test:run
+```
+
+Runs all Vitest tests once.
+
+```bash
+npm run test:coverage
+```
+
+Runs tests with coverage reporting.
+
+### E2E Tests
+
+```bash
+npm run e2e
+```
+
+Runs Playwright E2E tests.
+
+```bash
+npm run e2e:ui
+```
+
+Runs Playwright E2E tests in UI mode.
+
+## Core Web Vitals
+
+Core Web Vitals are tracked through the `web-vitals` package.
+
+During development, metric results are logged in the browser console. To inspect them:
+
+1. Start the app:
+
+```bash
+npm run dev
+```
+
+2. Open the browser DevTools.
+3. Go to the `Console` tab.
+4. Interact with the app and check the reported metrics.
+
+Tracked metrics:
+
+- CLS
+- FCP
+- INP
+- LCP
+- TTFB
+
+The Web Vitals registration lives in:
+
+```txt
+src/reportWebVitals.ts
 ```
 
 
-## Loading a game
+## Project Structure
 
-We have written an API for loading the games. Here's a simple example of how to load a game through our API:
+```txt
+src/
+  api.ts
+  App.tsx
+  main.tsx
+  reportWebVitals.ts
+  components/
+  features/
+  test/
+  types.ts
+```
 
-```javascript
+## Game Launch Integration
+
+The game runtime script is loaded from `index.html` because it is provided as a standalone external script for the assignment.
+
+Games are launched through the provided global API:
+
+```ts
 comeon.game.launch('feastingfox');
 ```
 
-It basically takes a game code as an in parameter.
-The div with id game-launch will be replaced with an object tag that loads the game.
+## Mock API
 
-## More info
+The mock API is powered by `json-server` and uses the provided mock data and middleware:
 
-- Use of React and TS is encouraged.
-- Use of JS and [jQuery](https://jquery.com/) is discouraged. 
-- External libraries used in this test: [Semantic UI](http://semantic-ui.com/), [json-server](https://github.com/typicode/json-server)
+```bash
+json-server --watch mock/mock-data.json --port 3001 --middlewares mock/mock-api.js
+```
 
-## Found a bug?
+Use the project script instead of running this manually:
 
-Pull requests welcome, and maybe [we have a job for you](http://jobs.comeon.com/)? :)
-
-## How to Submit the Home Assignment
-We would prefer that you push the code to a git repo and send us the link, but you could also send us your code in a compressed file in an email.
-
-## QuickSpin Games
-
-All of the linked games and their media files and descriptions are properties of QuickSpin AB and can be found publicly on their web site at https://quickspin.com/
+```bash
+npm run mock:api
+```

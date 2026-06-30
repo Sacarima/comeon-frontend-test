@@ -1,11 +1,20 @@
 import { render, screen } from '@testing-library/react';
+import { BrowserRouter } from 'react-router-dom';
+import { describe, expect, it } from 'vitest';
 
+import { AuthProvider } from './context/AuthProvider';
 import { App } from './App';
 
 describe('App', () => {
-  it('renders the milestone setup screen', () => {
-    render(<App />);
+  it('renders the landing page', () => {
+    render(
+      <BrowserRouter>
+        <AuthProvider>
+          <App />
+        </AuthProvider>
+      </BrowserRouter>,
+    );
 
-    expect(screen.getByRole('heading', { name: /project setup and tooling/i })).toBeVisible();
+    expect(screen.getByRole('main')).toBeVisible();
   });
 });

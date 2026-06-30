@@ -1,9 +1,7 @@
 import './App.css';
 
-export function App() {
-  return (
-    <main className="app-shell">
+import { AppRoutes } from './routes/AppRoutes';
 
-    </main>
-  );
+export function App() {
+  return <AppRoutes />;
 }

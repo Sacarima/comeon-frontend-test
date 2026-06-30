@@ -1,0 +1,36 @@
+:root {
+  --base-05: 149, 157, 149;
+  --base-07: 60, 66, 60;
+  --base-08: 41, 47, 42;
+  --base-09: 31, 37, 33;
+  --base-10: 26, 30, 26;
+  --base-11: 23, 28, 23;
+
+  --primary-green: 57, 245, 106;
+  --primary-green-light: 192, 249, 200;
+  --primary-green-lighter: 195, 249, 200;
+  --error: 255, 127, 127;
+
+  --color-bg: rgba(var(--base-10), 1);
+  --color-bg-dark: rgba(var(--base-11), 1);
+  --color-surface: rgba(var(--base-08), 1);
+  --color-surface-dark: rgba(var(--base-09), 1);
+
+  --color-text: rgba(249, 249, 249, 1);
+  --color-text-muted: rgba(var(--base-05), 1);
+  --color-text-dark: rgba(var(--base-11), 1);
+
+  --color-primary: rgba(var(--primary-green), 1);
+  --color-primary-light: rgba(var(--primary-green-light), 1);
+  --color-error: rgba(var(--error), 1);
+  --color-error-light: rgba(var(--error), 0.5);
+
+  --radius-sm: 3px;
+  --radius-md: 6px;
+  --radius-lg: 12px;
+  --radius-pill: 999px;
+
+  --header-height: 72px;
+
+  --shadow-modal: 0 0 8px 1px rgba(0, 0, 0, 0.25);
+}

@@ -1,7 +1,30 @@
-export function Header() {
+
+
+import { Link } from 'react-router-dom';
+import { useAuth } from '../hooks/useAuth';
+
+type HeaderProps = {
+  showActions?: boolean;
+  variant?: 'default' | 'transparent';
+};
+
+export function Header({
+  showActions = true,
+  variant = 'default',
+}: HeaderProps) {
+  const { player } = useAuth();
+
+  const headerClassName =
+    variant === 'transparent'
+      ? 'app-header app-header-transparent'
+      : 'app-header';
+
+  const shouldShowAuthActions = showActions && !player;
+
+
   return (
-    <header className="app-header">
-      <button type="button" className="app-logo-button" aria-label="ComeOn home">
+    <header className={headerClassName}>
+      <Link to="/" className="app-logo-button" aria-label="ComeOn home">
         <svg viewBox="0 0 120 26" className="app-logo" aria-hidden="true">
           <path
             d="M8.80689 4.83971C13.0708 4.49014 15.421 7.06647 14.5797 11.2771L14.3516 12.3159L9.16436 12.4966L9.58107 10.8031C9.68081 10.2768 9.78252 9.64083 9.39148 9.22806C9.10215 8.9565 8.63309 8.96341 8.26871 9.07697C7.91125 9.19745 7.66537 9.50258 7.50046 9.8324C7.21113 10.1899 5.03176 19.0979 4.83032 19.7121C4.6348 20.4833 4.5716 21.6051 5.58475 21.7493C6.20686 21.8421 6.62753 21.5291 6.90106 20.9879C7.34444 20.1081 7.60809 18.6002 7.8757 17.6394L13.0827 17.5061L12.7617 18.9735C12.4635 20.3056 12.0537 21.6071 11.4059 22.7871C10.8678 23.7667 10.0995 24.5991 9.14165 25.1709C8.10874 25.792 6.89908 26.0083 5.68942 25.9984C3.79248 26.0023 1.88961 25.3437 0.840908 23.6976C0.164486 22.639 -0.05276 21.3592 0.0104386 20.1012C0.0489502 19.3428 0.180286 18.5844 0.378769 17.8191L2.19869 10.8357C2.34187 10.2728 2.52061 9.73069 2.74476 9.20831C3.85173 6.58063 5.94617 5.03326 8.80689 4.83971Z"
@@ -36,17 +59,19 @@ export function Header() {
             fill="currentColor"
           />
         </svg>
-      </button>
+      </Link>
 
-      <div className="app-header-actions">
-        <button type="button" className="button button-primary">
-          REGISTER
-        </button>
+      {shouldShowAuthActions && (
+        <div className="app-header-actions">
+          <Link to="/register" className="button button-primary">
+            REGISTER
+          </Link>
 
-        <button type="button" className="button button-link">
-          Log in
-        </button>
-      </div>
+          <Link to="/login" className="button button-link">
+            Log in
+          </Link>
+        </div>
+      )}
     </header>
   );
 }
